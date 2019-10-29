@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+<html>
+<head>
+  <style>
+    div.content{
+      text-indent: 350px;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+  </style>
+
+</head>
+<div class = "content">
+<h1>
+  Latest Releases:
+</h1>
+{% if newgames != [] %}
+<ul>
+  {% for game in newgames %}
+  <li><a href="{{url_for('viewGame',genre_id = game.id_genre,game_id = game.id)}}">{{game.name}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p> There are now new games! </p>
+{% endif %}
+</div>
+
+</html>

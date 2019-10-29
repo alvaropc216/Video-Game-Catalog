@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+<html>
+<head>
+  <style>
+
+  #description{
+    width: 70%;
+    height:15%;
+  }
+
+  div.content{
+    margin-left: 350px;
+  }
+
+
+  </style>
+</head>
+
+<body>
+  <div class='content'>
+  <h1>{{game.name}}</h1>
+  <h2>{{genre.name}}</h2>
+  <p>{{game.description}}</p>
+  </br>
+  {% if user_id == game.user_id %}
+  <a href="{{url_for('editGame',genre_id=genre.id,game_id=game.id)}}">Edit</a></br>
+  <a href="{{url_for('deleteGame',genre_id = genre.id, game_id = game.id)}}"
+  >Delete</a></br>
+  {% endif %}
+  <a href="{{url_for('showGames',genre_id = genre.id)}}">Take me back</a>
+</div>
+
+</body>
+
+
+</html>

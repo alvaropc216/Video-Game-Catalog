@@ -1,0 +1,43 @@
+
+{% include 'header.html' %}
+
+<html>
+<head>
+  <style>
+
+  #description{
+    width: 70%;
+    height:15%;
+  }
+
+  div.content{
+    margin-left: 350px;
+  }
+
+
+  </style>
+</head>
+<body>
+  <div class = content>
+  <h1> Edit {{game.name}}? </h1>
+  {% if message != None %}
+    <p class='warning'>{{message}}</p>
+  {% endif %}
+  <p> Is something not right with {{game.name}}? We think it is perfect.</p>
+  <p> That doesn't mean it can be perfecter-er... though.</p>
+
+  <form method='POST' action="{{url_for('editGame',genre_id=genre.id, game_id = game.id)}}" id="editgame">
+    <p> Name:
+    <input type='text' name='newname' value="{{game.name}}" style="width: 50%"></p>
+    <p> Description:</p>
+    <textarea name='newdescription' form='editgame' style="width: 70%; height:10%"
+    placeholder="{{game.description}}"></textarea> </br>
+    <input type='submit' value='Edit'>
+  </form>
+
+  <a href="{{url_for('viewGame',genre_id=genre.id,game_id=game.id)}}">Nevermind take me back</a>
+</div>
+</body>
+
+
+</html>

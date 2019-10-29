@@ -1,0 +1,37 @@
+
+{% block content %}
+{% include 'header.html' %}
+
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>New Genre</title>
+    <style>
+      div.content{
+        text-indent: 350px;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <div class = 'content'>
+    <h1>Create New Genre</h1>
+
+      <div id="newgenreform">
+      <form method="POST" action="{{url_for('createGenre')}}">
+        <input type="text" name="name" placeholder="New Genre">
+        <input type="submit" value='Create'>
+      </form>
+      </div>
+      </br>
+      <a class='button' href="{{url_for('showGenres')}}">Cancel</a>
+    </div>
+ </body>
+</html>
+{% endblock %}

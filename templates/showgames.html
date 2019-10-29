@@ -1,0 +1,41 @@
+{% include 'header.html' %}
+<html>
+<head>
+  <style>
+
+  #description{
+    width: 70%;
+    height:15%;
+  }
+
+  div.content{
+    margin-left: 350px;
+  }
+
+
+  </style>
+</head>
+
+<body>
+  <div class='content'>
+  <h1>{{genre.name}}</h1>
+  {% if games != [] %}
+
+    {% for game in games %}
+    <ul>
+      <li><a href="{{url_for('viewGame',genre_id = genre.id, game_id = game.id)}}">{{game.name}}</a></li>
+    </ul>
+    {% endfor %}
+  {% else %}
+    <p> No games found! But stay determined new games coming soon!!</p>
+  {% endif %}
+
+  {% if 'username' in session %}
+  <a href="{{url_for('createGame',genre_id = genre.id)}}">Create a new game!</a>
+  {% endif %}
+</br>
+  <a href="{{url_for('showGenres')}}">Go Back to Main</a>
+</div>
+</body>
+
+</html>

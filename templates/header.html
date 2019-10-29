@@ -1,0 +1,99 @@
+<html>
+<head>
+  <style>
+    .sidenav{
+      height:100%;
+      width: 300px;
+      position:fixed;
+      z-index = 1;
+      top: 0;
+      left: 0;
+      background-color:#000066;
+      overflow-x: hidden;
+      transition:0.5s;
+      padding-top:60px;
+    }
+
+    #maintitle{
+      color:#ffffff;
+      position: relative;
+      bottom: 60px;
+    }
+
+    #genremenu{
+      color:#ffffff;
+    }
+
+    #creategenre{
+      color:#ffffff;
+    }
+
+    #nogenres{
+      color:#ffffff;
+    }
+
+    #login{
+      color:#ffffff;
+    }
+
+    #username{
+      color:#ffffff;
+    }
+
+
+
+  </style>
+</head>
+  <body>
+    <div id="sidenavigation" class="sidenav">
+      <h1 id ='maintitle'><a href="{{url_for('showGenres')}}"
+        style="color: #ffffff; text-decoration: none;">UnderGames</a></h1>
+
+      {% if 'username' in session %}
+      <p id='username'> Welcome {{session['username']}}!</p>
+      <a href="{{url_for('disconnect')}}" id='login'>Log Out</a>
+      {% else %}
+      <a href="{{url_for('showLogin')}}" id='login'>Login</a>
+      {% endif %}
+
+      {% if genres !=[] %}
+        <ul style="list-style-type:none;">
+          {% for genre in genres %}
+          <a id='genremenu' href="{{url_for('showGames',genre_id = genre.id)}}">
+          <li id='listedgenre'><strong>{{genre.name}}</strong> ({{genre.count}})</li>
+          </a>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p id='nogenres'>We called for all the Genres...</br>
+                         But nobody came.</p>
+      {% endif %}
+
+      {% if 'username' in session %}
+       <a id='creategenre' href="{{url_for('createGenre')}}">Create New Genre</a>
+      {% else %}
+       <p id='nogenres'> Please login to create a new Genre </a>
+      {% endif %}
+
+       </br></br>
+       {% if createdgenres != [] %}
+       <form method = 'GET' name='deleteGenreSelection' onSubmit="actionDelete()">
+       <select id ="deleteSelection">
+         {% for genre in createdgenres %}
+          <option value="{{genre.id}}">{{genre.name}}</option>
+         {% endfor %}
+      </select>
+      <input type="submit" value ="Delete" class="button">
+      </form>
+      {% endif %}
+    </div>
+    <script>
+      function actionDelete(){
+        var deletion = document.getElementById("deleteSelection");
+        var deleteme = deletion.options[deletion.selectedIndex].value;
+        document.deleteGenreSelection.action = "/main/" + deleteme +"/delete";
+      }
+    </script>
+
+  </body>
+</html>
