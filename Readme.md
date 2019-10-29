@@ -1,6 +1,6 @@
 # Video Game Catalog
 
-##About
+## About
 
 This project present a Video Game catalog that allows the creation and deletion of genres (game categories) and individual games within each genre. Each game has a title and a description which can be edited or deleted. Genres can be deleted only. When a Genre is deleted, all games within will also be deleted. The catalog also includes a username functionality where only users who have created a genre / game can edit or delete said genre / game.
 
@@ -59,5 +59,21 @@ http://localhost:5000
 ```
 
 Once in the main page you will have to Login in order to create a genre or create a game within a genre. The database will begin empty, so the user should provide genres and games to fill the database.
+
+### JSON Functionality
+
+The information in the database can be accessed using JSON.
+
+If you want to receive the information for all Genres, use the following:
+```
+http://localhost:5000/main/JSON
+```
+
+If you want to receive the information for a particular Genre, showing all games from that group, use the following:
+
+```
+http://localhost:5000/main/<int:genre_id>/jSON
+```
+Where `<int:genre_id>` represent the unique ID that identifies the desired Genre (This ID can be seen in the first JSON request for all Genres)
 
 Thank you for using the Video Game catalog!
