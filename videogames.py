@@ -177,6 +177,12 @@ def GameJSON(genre_id):
     Games_to_JSON = session.query(Game).filter_by(id_genre=genre_id).all()
     return jsonify(Game=[i.serialize for i in Games_to_JSON])
 
+@app.route('/main/<int:genre_id>/games/<int:game_id>/JSON')
+def OneGameJSON(genre_id, game_id):
+    session = DBSession()
+    Game_to_JSON = session.query(Game).filter_by(id=game_id).one()
+    return jsonify(Game=Game_to_JSON.serialize)
+
 
 # END OF JSON FUNCTIONALITY #
 
